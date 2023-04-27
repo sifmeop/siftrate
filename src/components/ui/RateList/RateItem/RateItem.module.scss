@@ -1,0 +1,45 @@
+.wrapper {
+  @apply mb-[1.875rem] rounded-[10px] bg-white/10 px-10 py-5;
+}
+
+.date {
+  @apply block text-right text-lg text-white/50;
+}
+
+.info {
+  @apply flex items-center gap-12 text-2xl font-bold;
+}
+
+.title {
+  margin-right: auto;
+}
+
+.rate {
+  @apply flex items-center gap-2;
+}
+
+.maxRate {
+  @apply text-xl opacity-50;
+}
+
+.comment {
+  @apply mt-3 break-all italic;
+}
+
+@media (max-width: 425px) {
+  .wrapper {
+    @apply px-5 py-3;
+  }
+  .info {
+    @apply relative flex-col gap-3 text-center;
+  }
+  .index {
+    @apply absolute left-0 top-0 opacity-70;
+  }
+  .title {
+    @apply mr-0 text-xl;
+  }
+  .comment {
+    @apply text-base;
+  }
+}

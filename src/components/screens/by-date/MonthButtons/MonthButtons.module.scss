@@ -1,0 +1,11 @@
+.wrapper {
+  @apply mb-5 grid grid-cols-6 gap-3;
+
+  @media (max-width: 768px) {
+    @apply grid-cols-4;
+  }
+
+  @media (max-width: 425px) {
+    @apply grid-cols-3;
+  }
+}

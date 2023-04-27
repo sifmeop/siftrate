@@ -1,0 +1,11 @@
+.list {
+  @apply absolute left-0 top-full h-96 w-full overflow-y-auto rounded-[0.625rem] border border-white/10 bg-black p-[0.625rem];
+}
+
+.item {
+  @apply flex cursor-pointer gap-3 rounded-[0.625rem] px-4 py-3 hover:bg-white/10;
+}
+
+.rate {
+  @apply flex items-center gap-2;
+}

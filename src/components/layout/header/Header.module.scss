@@ -1,0 +1,76 @@
+.header {
+  @apply fixed left-0 right-0 top-0 z-10 mx-auto flex max-w-[45.0625rem] justify-center gap-[10px]  rounded-[0.625rem] bg-black/50 p-[10px] transition-all duration-300;
+}
+
+.logoWrapper {
+  @apply grid h-[6.25rem] w-[15.625rem] place-items-center rounded-[0.625rem] bg-[#0E0E0E];
+}
+
+.list {
+  @apply grid grid-cols-2 gap-[1px] rounded-[0.625rem] text-xl;
+}
+
+.item {
+  @apply bg-white/10 transition-colors hover:bg-white/30;
+
+  &:first-child {
+    border-top-left-radius: 10px;
+  }
+
+  &:nth-child(2) {
+    border-top-right-radius: 10px;
+  }
+
+  &:nth-child(3) {
+    border-bottom-left-radius: 10px;
+  }
+
+  &:last-child {
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.link {
+  @apply grid h-[3.0938rem] w-[13.75rem] place-items-center;
+}
+
+.activeScroll {
+  @apply max-w-full rounded-none bg-black;
+}
+
+.activeLink {
+  @apply bg-white/40;
+}
+
+@media (max-width: 425px) {
+  .header {
+    @apply items-center justify-between rounded-none px-10;
+
+    & > a img {
+      @apply h-[2.5rem] w-[8.125rem];
+    }
+  }
+  .logoWrapper {
+    @apply h-[3rem] w-[10rem];
+  }
+  .menu {
+    @apply fixed bottom-0 left-0 top-0 mr-auto h-full w-full -translate-x-full overflow-y-auto overflow-x-hidden bg-black px-4 pt-[4.25rem] opacity-0 transition-all duration-500;
+    z-index: 12;
+  }
+  .menuOpen {
+    @apply translate-x-0 opacity-100;
+  }
+  .list {
+    @apply grid-cols-1 gap-3;
+  }
+  .item {
+    & {
+      &:first-child,
+      &:nth-child(2),
+      &:nth-child(3),
+      &:last-child {
+        border-radius: 10px;
+      }
+    }
+  }
+}

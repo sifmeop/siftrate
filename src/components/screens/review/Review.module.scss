@@ -1,0 +1,24 @@
+.form {
+  @apply mx-auto flex max-w-xl flex-col gap-y-[0.625rem] rounded-[0.625rem] bg-white/10 p-[1.875rem];
+
+  & > div {
+    @apply flex flex-col gap-y-[5px];
+  }
+}
+
+.button {
+  @apply inline-block h-[3.125rem] w-full rounded-[0.625rem] border border-white/10 bg-black px-5 py-2 outline-offset-2 transition-all duration-300 focus:outline-none;
+  outline: transparent solid 2px;
+
+  &:hover {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  &:focus {
+    border-color: rgb(255 255 255 / 0.4);
+  }
+
+  &:disabled {
+    // @apply bg-white-secondary border-white/10 shadow-none;
+  }
+}

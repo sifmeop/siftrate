@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body {
+  @apply bg-[#0e0e0e] text-lg text-white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  @apply mb-[1.5625rem] text-center text-4xl font-bold;
+}
+
+.input {
+  @apply inline-block h-[3.125rem] w-full rounded-[0.625rem] border border-white/10 bg-black px-5 py-2 outline-offset-2 transition-all duration-300 focus:outline-none;
+  outline: transparent solid 2px;
+
+  &:hover {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  &:focus {
+    border-color: rgb(255 255 255 / 0.4);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.textarea {
+  @apply inline-block w-full resize-none rounded-[0.625rem] border border-white/10 bg-black px-5 py-2 outline-offset-2 transition-all duration-300 focus:outline-none;
+  outline: transparent solid 2px;
+
+  &:hover {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  &:focus {
+    border-color: rgb(255 255 255 / 0.4);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.loginButton {
+  @apply mx-auto block rounded-[0.625rem] bg-white/30 px-4 py-2 text-2xl font-bold transition-colors duration-300 hover:bg-white/40;
+}

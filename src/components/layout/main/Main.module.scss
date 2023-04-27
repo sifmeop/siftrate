@@ -1,0 +1,7 @@
+.main {
+  @apply mt-[7.5rem] px-4 pt-[1.5625rem];
+
+  @media (max-width: 425px) {
+    margin-top: 4.25rem;
+  }
+}

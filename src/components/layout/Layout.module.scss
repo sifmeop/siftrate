@@ -1,0 +1,9 @@
+.wrapper {
+  @apply grid h-full;
+  // grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr;
+}
+
+.loader {
+  @apply fixed inset-0 z-20 grid place-items-center bg-black;
+}
