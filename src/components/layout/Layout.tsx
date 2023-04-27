@@ -1,3 +1,5 @@
+import { useSession } from 'next-auth/react'
+import AuthRequired from '../ui/AuthRequired/AuthRequired'
 import styles from './Layout.module.scss'
 import Header from './header/Header'
 import Main from './main/Main'
@@ -7,14 +9,9 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  // const { data: session } = useSession()
-  // const router = useRouter()
+  const { data: session } = useSession()
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     void router.push('/api/auth/signin')
-  //   }
-  // }, [session])
+  if (!session) return <AuthRequired />
 
   return (
     <div className={styles.wrapper}>

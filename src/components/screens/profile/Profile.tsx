@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import AuthRequired from '@/components/ui/AuthRequired/AuthRequired'
 import { handleLogout } from '@/utils/constants'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
@@ -30,9 +29,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  ) : (
-    <AuthRequired />
-  )
+  ) : null
 }
 
 export default Profile
