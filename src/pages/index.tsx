@@ -6,7 +6,7 @@ const HomePage = () => {
     <>
       <Meta
         title='Главная | Siftrate'
-        description='Главная страница которая описывает что из себя представляет сайт'
+        description='Главная страница с профилем'
       />
       <Home />
     </>

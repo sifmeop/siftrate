@@ -1,0 +1,27 @@
+.profile {
+  @apply mx-auto max-w-fit rounded-[0.625rem] bg-white/10;
+}
+
+.name {
+  @apply rounded-t-[0.625rem] bg-white/50 px-8 py-4 text-center text-2xl font-bold;
+}
+
+.info {
+  @apply flex flex-col items-center gap-5 p-3;
+}
+
+.photo {
+  @apply mx-auto h-32 w-32 rounded-full;
+}
+
+.mail {
+  @apply text-xl font-medium;
+}
+
+.button {
+  @apply w-full rounded-[0.625rem] bg-white/30 px-4 py-2 text-center text-2xl font-bold transition-colors duration-300 hover:bg-white/40;
+}
+
+.login {
+  @apply mx-auto block rounded-[0.625rem] bg-white/30 px-4 py-2 text-2xl font-bold transition-colors duration-300 hover:bg-white/40;
+}
