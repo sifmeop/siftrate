@@ -1,17 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { type Form } from '@/types/form.interface'
 import { memo, useEffect } from 'react'
-import { type FieldErrors, type UseFormRegister } from 'react-hook-form'
 
 interface Props {
-  register: UseFormRegister<Form>
-  errors: FieldErrors<Form>
   link: string
   error: boolean
   setError: (value: boolean) => void
 }
 
-const ImageLink = ({ error, setError, register, errors, link }: Props) => {
+const ImageLink = ({ error, setError, link }: Props) => {
   useEffect(() => {
     setError(false)
   }, [link])

@@ -70,15 +70,9 @@ const Review = () => {
       <h1 className='title'>ОЦЕНИТЬ</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Search setValues={setValue} />
-        <ImageLink
-          register={register}
-          errors={errors}
-          link={link}
-          error={error}
-          setError={setError}
-        />
+        <ImageLink link={link} error={error} setError={setError} />
         <Commentary register={register} />
-        <Rating register={register} errors={errors} setValue={setValue} />
+        <Rating register={register} errors={errors} />
         <button className={styles.button}>Оценить</button>
       </form>
     </>

@@ -1,19 +1,14 @@
 import { type Form } from '@/types/form.interface'
 import clsx from 'clsx'
-import {
-  type FieldErrors,
-  type UseFormRegister,
-  type UseFormSetValue
-} from 'react-hook-form'
+import { type FieldErrors, type UseFormRegister } from 'react-hook-form'
 import styles from './Rating.module.scss'
 
 interface Props {
   register: UseFormRegister<Form>
   errors: FieldErrors<Form>
-  setValue: UseFormSetValue<Form>
 }
 
-const Rating = ({ register, errors, setValue }: Props) => {
+const Rating = ({ register, errors }: Props) => {
   return (
     <div>
       <label className='text-[#ffffffb3]'>

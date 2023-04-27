@@ -11,11 +11,7 @@ export const useCountYearlyRatedMovies = (year: number) => {
 
   const userId = session?.user.id as string
 
-  const {
-    data: rating,
-    isLoading,
-    isError
-  } = api.rate.getYearlyRatedMovies.useQuery({
+  const { data: rating } = api.rate.getYearlyRatedMovies.useQuery({
     userId,
     year
   })
