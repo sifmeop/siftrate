@@ -3,7 +3,7 @@ import axios from 'axios'
 import { API_KEY, API_URL } from './constants'
 
 export const fetchMovies = async (query: string): Promise<Search> => {
-  const response = await axios.get<Search>(`${API_URL}/search/movie`, {
+  const response = await axios.get<Search>(`${API_URL}/search/multi`, {
     params: {
       api_key: API_KEY,
       query: query,

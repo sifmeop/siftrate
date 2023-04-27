@@ -23,7 +23,7 @@ const SearchList = ({ results, setValue, setValues }: Props) => {
       ? `${IMAGE_URL}${item.poster_path}`
       : '/unknown.svg'
 
-    setValues('title', item.title)
+    setValues('title', item.title ?? item.name)
     setValues('link', poster)
     setValue('')
   }
@@ -43,13 +43,15 @@ const SearchList = ({ results, setValue, setValues }: Props) => {
                 ? `${IMAGE_URL}${item.poster_path}`
                 : '/unknown.svg'
             }
-            alt={item.title}
+            alt={item.title ?? item.name}
           />
           <div className='flex flex-col gap-y-2'>
             <h3>
-              <b>{item.title}</b>
+              <b>{item.title ?? item.name}</b>
             </h3>
-            <p>{new Date(item.release_date).getFullYear()}</p>
+            <p>
+              {new Date(item.release_date ?? item.first_air_date).getFullYear()}
+            </p>
             <div className={styles.rate}>
               <Image width={25} height={25} src='/rate.svg' alt='Rate icon' />
               {item.vote_average.toFixed(1)}

@@ -1,5 +1,4 @@
 import { type Month } from '@/types/months.interface'
-import { signIn, signOut } from 'next-auth/react'
 
 export const API_KEY = '2e418a90d6fed4aa1bdf54489a9ec741'
 
@@ -31,7 +30,3 @@ export const years: number[] = Array.from(
   { length: currentYear - startYear + 1 },
   (_, i) => startYear + i
 )
-
-export const handleLogin = async () => await signIn()
-
-export const handleLogout = async () => await signOut()

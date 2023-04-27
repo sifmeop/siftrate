@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { handleLogout } from '@/utils/constants'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import styles from './Profile.module.scss'
 
@@ -23,7 +22,7 @@ const Profile = () => {
             alt={`Photo ${name}`}
           />
           <p className={styles.mail}>{data.user.email}</p>
-          <button className={styles.button} onClick={() => void handleLogout()}>
+          <button className={styles.button} onClick={() => void signOut()}>
             Выйти
           </button>
         </div>

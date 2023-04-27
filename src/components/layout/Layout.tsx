@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react'
 import AuthRequired from '../ui/AuthRequired/AuthRequired'
+import Loader from '../ui/Loader/Loader'
 import styles from './Layout.module.scss'
 import Header from './header/Header'
 import Main from './main/Main'
@@ -9,7 +10,14 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+
+  if (status === 'loading')
+    return (
+      <div className={styles.loader}>
+        <Loader />
+      </div>
+    )
 
   if (!session) return <AuthRequired />
 
@@ -17,7 +25,6 @@ const Layout = ({ children }: Props) => {
     <div className={styles.wrapper}>
       <Header />
       <Main>{children}</Main>
-      {/* <Footer /> */}
     </div>
   )
 }
