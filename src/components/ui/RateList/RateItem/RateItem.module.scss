@@ -7,11 +7,12 @@
 }
 
 .info {
-  @apply flex items-center gap-12 text-2xl font-bold;
+  @apply grid items-center gap-8 text-2xl font-bold;
+  grid-template-columns: auto auto 1fr auto;
 }
 
 .title {
-  margin-right: auto;
+  @apply mr-auto line-clamp-1;
 }
 
 .rate {
@@ -31,7 +32,7 @@
     @apply px-5 py-3;
   }
   .info {
-    @apply relative flex-col gap-3 text-center;
+    @apply relative grid-cols-1 justify-items-center gap-3 text-center;
   }
   .index {
     @apply absolute left-0 top-0 opacity-70;
