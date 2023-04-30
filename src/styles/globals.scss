@@ -35,6 +35,19 @@ body {
   }
 }
 
+.button {
+  @apply inline-block h-[3.125rem] w-full rounded-[0.625rem] border border-white/10 bg-black px-5 py-2 outline-offset-2 transition-all duration-300 focus:outline-none;
+  outline: transparent solid 2px;
+
+  &:hover {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  &:focus {
+    border-color: rgb(255 255 255 / 0.4);
+  }
+}
+
 .textarea {
   @apply inline-block w-full resize-none rounded-[0.625rem] border border-white/10 bg-black px-5 py-2 outline-offset-2 transition-all duration-300 focus:outline-none;
   outline: transparent solid 2px;

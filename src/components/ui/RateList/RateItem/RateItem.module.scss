@@ -2,8 +2,16 @@
   @apply mb-[1.875rem] rounded-[10px] bg-white/10 px-10 py-5;
 }
 
+.movieTop {
+  @apply mb-1 flex items-center justify-end gap-4;
+}
+
 .date {
-  @apply block text-right text-lg text-white/50;
+  @apply text-lg text-white/50;
+}
+
+.dateNow {
+  @apply text-white underline;
 }
 
 .info {
@@ -30,6 +38,9 @@
 @media (max-width: 425px) {
   .wrapper {
     @apply px-5 py-3;
+  }
+  .movieTop {
+    justify-content: space-between;
   }
   .info {
     @apply relative grid-cols-1 justify-items-center gap-3 text-center;

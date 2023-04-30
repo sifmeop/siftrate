@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { type RatedMovie } from '@prisma/client'
+import clsx from 'clsx'
 import Image from 'next/image'
+import EditReview from './EditReview/EditReview'
 import styles from './RateItem.module.scss'
 
 interface Props {
@@ -9,11 +11,21 @@ interface Props {
 }
 
 const RateItem = ({ movie, index }: Props) => {
+  const isCurrentDay =
+    new Date(movie.date).toLocaleDateString() ===
+    new Date().toLocaleDateString()
+
   return (
     <div key={movie.id} className={styles.wrapper}>
-      <time className={styles.date}>
-        {new Date(movie.date).toLocaleDateString()}
-      </time>
+      <div className={styles.movieTop}>
+        <time
+          className={clsx(styles.date, {
+            [styles.dateNow as string]: isCurrentDay
+          })}>
+          {new Date(movie.date).toLocaleDateString()}
+        </time>
+        <EditReview review={movie} />
+      </div>
       <div className={styles.info}>
         <span className={styles.index}>{index}.</span>
         <img

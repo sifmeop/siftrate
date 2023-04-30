@@ -73,7 +73,7 @@ const Review = () => {
         <ImageLink link={link} error={error} setError={setError} />
         <Commentary register={register} />
         <Rating register={register} errors={errors} />
-        <button className={styles.button}>Оценить</button>
+        <button className='button'>Оценить</button>
       </form>
     </>
   )

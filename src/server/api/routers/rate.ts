@@ -89,5 +89,24 @@ export const rateRouter = createTRPCRouter({
           month: input.month
         }
       })
+    }),
+  updateRate: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        comment: z.string(),
+        rated: z.number()
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.ratedMovie.update({
+        where: {
+          id: input.id
+        },
+        data: {
+          comment: input.comment,
+          rated: input.rated
+        }
+      })
     })
 })
