@@ -2,18 +2,14 @@ import RateList from '@/components/ui/RateList/RateList'
 import SelectRating from '@/components/ui/SelectRating/SelectRating'
 import { useRatedMovies } from '@/hooks/useRatedMovies'
 import { type RatedMovie } from '@prisma/client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const Rating = () => {
   const { data, isLoading, isError } = useRatedMovies()
 
   const [list, setList] = useState<RatedMovie[] | undefined>([])
 
-  useEffect(() => {
-    setList(data)
-  }, [data])
-
-  if (!data) return
+  if (!data) return null
 
   return (
     <>

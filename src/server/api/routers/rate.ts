@@ -108,5 +108,18 @@ export const rateRouter = createTRPCRouter({
           rated: input.rated
         }
       })
+    }),
+  deleteRate: publicProcedure
+    .input(
+      z.object({
+        id: z.string()
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.ratedMovie.delete({
+        where: {
+          id: input.id
+        }
+      })
     })
 })

@@ -2,6 +2,7 @@
 import { type RatedMovie } from '@prisma/client'
 import clsx from 'clsx'
 import Image from 'next/image'
+import DeleteReview from './DeleteReview/DeleteReview'
 import EditReview from './EditReview/EditReview'
 import styles from './RateItem.module.scss'
 
@@ -25,6 +26,7 @@ const RateItem = ({ movie, index }: Props) => {
           {new Date(movie.date).toLocaleDateString()}
         </time>
         <EditReview review={movie} />
+        <DeleteReview id={movie.id} />
       </div>
       <div className={styles.info}>
         <span className={styles.index}>{index}.</span>

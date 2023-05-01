@@ -1,6 +1,7 @@
 import { type Option } from '@/types/select.interface'
 import { ratedListOptions } from '@/utils/ratedListOptions'
 import { type RatedMovie } from '@prisma/client'
+import { useEffect } from 'react'
 import Select, {
   components,
   type GroupBase,
@@ -18,6 +19,10 @@ interface Props {
 
 const SelectRating = ({ data, setList }: Props) => {
   const options = ratedListOptions(data)
+
+  useEffect(() => {
+    setList(data)
+  }, [data])
 
   const customStyles:
     | StylesConfig<Option, false, GroupBase<Option>>
