@@ -1,5 +1,9 @@
 .edit {
   @apply grid h-8 w-8 place-items-center rounded-lg bg-white/30 transition-colors hover:bg-white/50;
+
+  @media (max-width: 425px) {
+    margin-left: auto;
+  }
 }
 
 .rating {

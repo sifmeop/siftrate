@@ -3,7 +3,7 @@
 }
 
 .movieTop {
-  @apply mb-1 flex items-center justify-end gap-4;
+  @apply mb-2 flex items-center justify-end gap-4;
 }
 
 .date {
@@ -38,9 +38,6 @@
 @media (max-width: 425px) {
   .wrapper {
     @apply px-5 py-3;
-  }
-  .movieTop {
-    justify-content: space-between;
   }
   .info {
     @apply relative grid-cols-1 justify-items-center gap-3 text-center;

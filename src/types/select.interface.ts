@@ -3,3 +3,5 @@ export interface Option {
   label: string
   count: number
 }
+
+export type OptionsFilter = Omit<Option, 'count'>

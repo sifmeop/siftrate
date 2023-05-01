@@ -1,7 +1,7 @@
 import { type Option } from '@/types/select.interface'
 import { ratedListOptions } from '@/utils/ratedListOptions'
 import { type RatedMovie } from '@prisma/client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Select, {
   components,
   type GroupBase,
@@ -17,29 +17,32 @@ interface Props {
   setList: (list: RatedMovie[]) => void
 }
 
+const customStylesSelect:
+  | StylesConfig<Option, false, GroupBase<Option>>
+  | undefined = {
+  option: (provided) => ({
+    ...provided,
+    color: 'black'
+  }),
+  control: (provided) => ({
+    ...provided,
+    color: 'black'
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'black'
+  })
+}
+
 const SelectRating = ({ data, setList }: Props) => {
   const options = ratedListOptions(data)
 
+  const [value, setValue] = useState(options[0])
+
   useEffect(() => {
     setList(data)
+    setValue(options[0])
   }, [data])
-
-  const customStyles:
-    | StylesConfig<Option, false, GroupBase<Option>>
-    | undefined = {
-    option: (provided) => ({
-      ...provided,
-      color: 'black'
-    }),
-    control: (provided) => ({
-      ...provided,
-      color: 'black'
-    }),
-    singleValue: (provided) => ({
-      ...provided,
-      color: 'black'
-    })
-  }
 
   const SingleValue = (props: SingleValueProps<Option>) => {
     const { label, count } = props.data
@@ -62,6 +65,7 @@ const SelectRating = ({ data, setList }: Props) => {
   }
 
   const handleChange = (selectedOption: SingleValue<Option>) => {
+    setValue(selectedOption as Option)
     if (selectedOption?.value === 'all') {
       setList(data)
       return
@@ -71,20 +75,20 @@ const SelectRating = ({ data, setList }: Props) => {
     )
   }
 
-  return (
+  return data.length > 0 ? (
     <Select
       aria-label='select rating stars'
-      className='mb-5 ml-auto max-w-[200px]'
-      styles={customStyles}
+      className='w-full max-w-[200px]'
+      styles={customStylesSelect}
       options={options}
       onChange={(selectedOption) => handleChange(selectedOption)}
-      defaultValue={options[0]}
+      value={value}
       getOptionLabel={(options) => `${options.label} ${options.count}`}
       getOptionValue={(options) => options.value}
       components={{ SingleValue, Option }}
       isSearchable={false}
     />
-  )
+  ) : null
 }
 
 export default SelectRating

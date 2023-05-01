@@ -29,13 +29,7 @@ const ByDate = () => {
       <div className='mx-auto max-w-[108.125rem]'>
         <YearsButtons data={data.year} setData={setData} />
         <MonthButtons data={data} setData={setData} />
-        {/* {isLoading && <Loader />} */}
-        {/* {isError && <h1 className='title'>ОШИБКА</h1>} */}
-        <RateList
-          rating={rating?.sort((a, b) => b.rated - a.rated)}
-          isLoading={isLoading}
-          isError={isError}
-        />
+        <RateList rating={rating} isLoading={isLoading} isError={isError} />
       </div>
     </>
   )

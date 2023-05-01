@@ -1,6 +1,5 @@
-import { useDeleteReview } from '@/hooks/useDeleteReview'
+import { useRatedMovies } from '@/hooks/useRatedMovies'
 import Image from 'next/image'
-import { Toaster } from 'react-hot-toast'
 import styles from './DeleteReview.module.scss'
 
 interface Props {
@@ -8,22 +7,19 @@ interface Props {
 }
 
 const DeleteReview = ({ id }: Props) => {
-  const { handleDeleteReview } = useDeleteReview()
+  const { handleDeleteReview } = useRatedMovies()
 
   return (
-    <>
-      <Toaster />
-      <button
-        className={styles.delete}
-        onClick={() => void handleDeleteReview(id)}>
-        <Image
-          width={20}
-          height={20}
-          src='/delete.svg'
-          alt='Иконка изменения отзыва'
-        />
-      </button>
-    </>
+    <button
+      className={styles.delete}
+      onClick={() => void handleDeleteReview(id)}>
+      <Image
+        width={20}
+        height={20}
+        src='/delete.svg'
+        alt='Иконка изменения отзыва'
+      />
+    </button>
   )
 }
 

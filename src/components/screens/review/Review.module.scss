@@ -1,5 +1,5 @@
 .form {
-  @apply mx-auto flex max-w-xl flex-col gap-y-[0.625rem] rounded-[0.625rem] bg-white/10 p-[1.875rem];
+  @apply mx-auto mb-[1.875rem] flex max-w-xl flex-col gap-y-[0.625rem] rounded-[0.625rem] bg-white/10 p-[1.875rem];
 
   & > div {
     @apply flex flex-col gap-y-[5px];

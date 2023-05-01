@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { useEditReview } from '@/hooks/useEditReview'
+import { useRatedMovies } from '@/hooks/useRatedMovies'
 import {
   Modal,
   ModalBody,
@@ -13,7 +13,6 @@ import { type RatedMovie } from '@prisma/client'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { Toaster } from 'react-hot-toast'
 import styles from './EditReview.module.scss'
 
 interface Props {
@@ -38,7 +37,7 @@ const EditReview = ({ review }: Props) => {
     defaultValues: { comment: review.comment ?? '', rating: review.rated }
   })
 
-  const { handleEditReview } = useEditReview()
+  const { handleEditReview } = useRatedMovies()
 
   const onSubmit: SubmitHandler<Form> = async (data) => {
     await handleEditReview(
@@ -50,7 +49,6 @@ const EditReview = ({ review }: Props) => {
 
   return (
     <>
-      <Toaster />
       <button className={styles.edit} onClick={onOpen}>
         <Image
           width={20}

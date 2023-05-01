@@ -1,4 +1,5 @@
 import { type Month } from '@/types/months.interface'
+import { type OptionsFilter } from '@/types/select.interface'
 
 export const API_KEY = '2e418a90d6fed4aa1bdf54489a9ec741'
 
@@ -30,3 +31,8 @@ export const years: number[] = Array.from(
   { length: currentYear - startYear + 1 },
   (_, i) => startYear + i
 )
+
+export const optionsFilter: OptionsFilter[] = [
+  { value: 'descending', label: 'По убыванию' },
+  { value: 'ascending', label: 'По возрастанию' }
+]

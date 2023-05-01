@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useRatedMovies } from '@/hooks/useRatedMovies'
 import { type Form } from '@/types/form.interface'
+import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { Toaster, toast } from 'react-hot-toast'
 import styles from './Review.module.scss'
 import Commentary from './commentary/Commentary'
 import ImageLink from './image-link/ImageLink'
@@ -11,6 +11,13 @@ import Rating from './rating/Rating'
 import Search from './search/Search'
 
 const Review = () => {
+  const toast = useToast({
+    status: 'success',
+    isClosable: true,
+    position: 'top',
+    duration: 1000
+  })
+
   const {
     register,
     handleSubmit,
@@ -42,31 +49,22 @@ const Review = () => {
       comment: data.comment
     })
 
-    console.log(message)
-
     if (message === 'Успешно оценено') {
-      toast.success(message, {
-        duration: 1000
-      })
+      toast({ title: message })
       reset()
       return
     }
 
     if (message.includes('Unique constraint failed on the constraint')) {
-      toast.error('Для него уже есть оценка', {
-        duration: 1000
-      })
+      toast({ title: 'Для него уже есть оценка' })
       return
     }
 
-    toast.error('Что-то пошло не так', {
-      duration: 1000
-    })
+    toast({ title: 'Что-то пошло не так' })
   }
 
   return (
     <>
-      <Toaster position='top-center' reverseOrder={false} />
       <h1 className='title'>ОЦЕНИТЬ</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Search setValues={setValue} />

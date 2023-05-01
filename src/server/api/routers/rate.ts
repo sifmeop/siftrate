@@ -90,7 +90,7 @@ export const rateRouter = createTRPCRouter({
         }
       })
     }),
-  updateRate: publicProcedure
+  editRate: publicProcedure
     .input(
       z.object({
         id: z.string(),
