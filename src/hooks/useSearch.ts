@@ -10,7 +10,11 @@ export const useSearch = (query: string) => {
     () => fetchMovies(debounced),
     {
       enabled: debounced.length > 0,
-      select: (data) => data.results
+      select: (data) =>
+        data.results.filter(
+          (item) =>
+            item.hasOwnProperty('media_type') && item.media_type !== 'person'
+        )
     }
   )
 

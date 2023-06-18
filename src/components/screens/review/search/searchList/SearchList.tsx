@@ -49,13 +49,18 @@ const SearchList = ({ results, setValue, setValues }: Props) => {
             <h3>
               <b>{item.title ?? item.name}</b>
             </h3>
-            <p>
-              {new Date(item.release_date ?? item.first_air_date).getFullYear()}
-            </p>
-            <div className={styles.rate}>
-              <Image width={25} height={25} src='/rate.svg' alt='Rate icon' />
-              {item.vote_average.toFixed(1)}
-            </div>
+            {item.release_date && (
+              <p>{new Date(item.release_date).getFullYear()}</p>
+            )}
+            {item.first_air_date && (
+              <p>{new Date(item.first_air_date).getFullYear()}</p>
+            )}
+            {item.vote_average && (
+              <div className={styles.rate}>
+                <Image width={25} height={25} src='/rate.svg' alt='Rate icon' />
+                {item.vote_average.toFixed(1)}
+              </div>
+            )}
           </div>
         </li>
       ))}
