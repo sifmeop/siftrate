@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum TypeEnum {
+  MOVIE
+  TV
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  access_token      String
+  refresh_token     String
+  expires_at        BigInt
+  id_token          String
+  provider          String
+  providerAccountId String
+  scope             String
+  token_type        String
+  type              String
+  userId            String  @db.ObjectId
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  session_state     String?
+
+  @@unique([provider, providerAccountId])
+}
+
+model RatedMovie {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  comment   String
+  createdAt DateTime @default(now())
+  isBest    Boolean
+  poster    String?
+  rated     Float
+  title     String
+  type      TypeEnum
+  userId    String
+
+  @@unique([userId, title])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  expires      DateTime @db.Date
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  emailVerified Json?
+  image         String
+  isVisibleRate Boolean
+  name          String
+  Account       Account[]
+  Session       Session[]
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier Json?
+  token      Json?    @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

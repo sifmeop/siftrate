@@ -1,0 +1,67 @@
+.wrapper {
+  @apply rounded-[10px] bg-white/5 px-10 py-5;
+}
+
+.movieTop {
+  @apply mb-2 flex justify-end gap-4;
+}
+
+.mediaType {
+  @apply absolute -right-2 -top-2 rounded-lg bg-white p-1 text-sm shadow-lg;
+}
+
+.info {
+  @apply grid items-center gap-8 text-2xl font-bold;
+  grid-template-columns: auto auto 1fr auto;
+}
+
+.infoTop {
+  @apply flex flex-wrap justify-between gap-2;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.title {
+  @apply mr-auto line-clamp-1;
+}
+
+.rate {
+  @apply flex items-center gap-2;
+}
+
+.maxRate {
+  @apply text-xl opacity-50;
+}
+
+.comment {
+  @apply mt-3 hyphens-auto italic;
+}
+
+.isMovie {
+  @apply bg-[#279EFF];
+}
+
+.isSeries {
+  @apply bg-[#CE5A67];
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    @apply px-5 py-3;
+  }
+  .info {
+    @apply relative grid-cols-1 justify-items-center gap-3 text-center;
+  }
+  .index {
+    @apply absolute left-0 top-0 opacity-70;
+  }
+  .title {
+    @apply mr-0 block text-xl;
+    overflow: initial;
+  }
+  .comment {
+    @apply text-base;
+  }
+}

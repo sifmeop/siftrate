@@ -1,0 +1,12 @@
+.main {
+  padding-top: calc(var(--header-height) + 20px);
+  padding-bottom: 20px;
+
+  &_container {
+    @apply mx-auto max-w-[1730px] px-4;
+  }
+
+  @media (width <= 600px) {
+    padding-bottom: calc(var(--nav-height) + 20px);
+  }
+}

@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* html,
+body,
+#__next {
+  height: 100%;
+} */
+
+html {
+  @apply min-h-full bg-[#0e0e0e];
+}
+
+body {
+  @apply text-base text-white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(255 255 255 / 0.8);
+}

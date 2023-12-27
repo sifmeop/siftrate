@@ -1,0 +1,49 @@
+.header {
+  @apply fixed left-0 right-0 top-0 z-10 mx-auto flex w-fit justify-center gap-3 bg-black/50 p-3 transition-all duration-300;
+}
+
+.logo {
+  @apply flex items-center justify-center bg-[#0E0E0E] p-6;
+}
+
+.nav ul {
+  @apply grid h-full grid-cols-2 gap-[1px] text-lg;
+}
+
+.item a {
+  @apply grid h-full place-items-center bg-white/10 px-6 py-3 transition-colors hover:bg-white/30;
+}
+
+.active_link {
+  @apply bg-white/30;
+}
+
+.active_scroll {
+  @apply w-full bg-black;
+}
+
+.icon {
+  @apply hidden;
+}
+
+@media (width <= 600px) {
+  .header {
+    @apply w-full flex-col;
+  }
+  .logo {
+    @apply p-3;
+  }
+  .nav {
+    @apply fixed bottom-0 left-0 w-full;
+
+    & ul {
+      @apply grid-cols-4 gap-0;
+    }
+  }
+  .item a {
+    @apply bg-[#484848] px-1 text-sm;
+  }
+  .icon {
+    display: block;
+  }
+}
