@@ -67,7 +67,7 @@ export const Header = () => {
     resizeObserver.observe(navRef.current)
     return () => resizeObserver.disconnect()
   }, [])
-
+  console.log(pathname, 'pathname')
   return (
     <header
       ref={headerRef}

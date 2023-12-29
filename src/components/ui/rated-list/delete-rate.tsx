@@ -25,15 +25,25 @@ export const DeleteRate = ({ id, title }: Props) => {
 
   const onDelete = async () => {
     try {
-      await mutateAsync(
-        { id },
+      await toast.promise(
+        mutateAsync(
+          { id },
+          {
+            onSuccess: () => void queryClient.invalidateQueries()
+          }
+        ),
         {
-          onSuccess: () => void queryClient.invalidateQueries()
+          loading: 'Изменение...',
+          success: () => {
+            onClose()
+            return 'Успешно удалено'
+          },
+          error: (error) => {
+            console.log('ОШИБКА УДАЛЕНИЯ ОТЗЫВА', error)
+            return 'Ошибка изменения'
+          }
         }
-      ).then(() => {
-        onClose()
-        toast.success('Успешно удалено')
-      })
+      )
     } catch (error) {
       console.log('ОШИБКА УДАЛЕНИЯ ОТЗЫВА', error)
       toast.error('Ошибка удаления отзыва')

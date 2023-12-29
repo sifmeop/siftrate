@@ -69,7 +69,10 @@ export const EditRate = ({ id, title, comment, isBest, rated }: Props) => {
         }),
         {
           loading: 'Изменение...',
-          success: 'Успешно изменено',
+          success: () => {
+            onClose()
+            return 'Успешно изменено'
+          },
           error: 'Ошибка изменения'
         }
       )

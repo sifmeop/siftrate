@@ -14,8 +14,8 @@
   @apply grid h-full place-items-center bg-white/10 px-6 py-3 transition-colors hover:bg-white/30;
 }
 
-.active_link {
-  @apply bg-white/30;
+.active_link a {
+  background-color: #6a6a6a !important;
 }
 
 .active_scroll {
