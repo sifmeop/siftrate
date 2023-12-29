@@ -40,6 +40,7 @@ model RatedMovie {
   title     String
   type      TypeEnum
   userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, title])
 }
@@ -53,14 +54,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String    @unique
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  email         String       @unique
   emailVerified Json?
   image         String
-  isVisibleRate Boolean   @default(true)
+  isVisibleRate Boolean      @default(true)
   name          String
   Account       Account[]
   Session       Session[]
+  RatedMovie    RatedMovie[]
 }
 
 model VerificationToken {

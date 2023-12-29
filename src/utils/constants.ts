@@ -2,7 +2,8 @@ export const ROUTES = {
   HOME: '/',
   RATE: '/rate',
   RATING: '/rating',
-  BY_DATE: '/by-date'
+  BY_DATE: '/by-date',
+  SEARCH: '/search'
 }
 
 export const MOVIE_DB_API_KEY = '2e418a90d6fed4aa1bdf54489a9ec741'
@@ -34,3 +35,5 @@ export const months = [
   { id: 11, title: 'Ноябрь' },
   { id: 12, title: 'Декабрь' }
 ]
+
+export const defaultContainerWidth = 'mx-auto flex flex-col max-w-3xl gap-6'

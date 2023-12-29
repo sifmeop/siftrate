@@ -26,9 +26,13 @@
   @apply hidden;
 }
 
+.search {
+  @apply flex items-center bg-white/10 p-2 transition-colors hover:bg-white/30;
+}
+
 @media (width <= 600px) {
   .header {
-    @apply w-full flex-col;
+    @apply w-full;
   }
   .logo {
     @apply p-3;
@@ -45,5 +49,8 @@
   }
   .icon {
     display: block;
+  }
+  .search {
+    @apply rounded-lg;
   }
 }

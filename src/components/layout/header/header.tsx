@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
 import { BsCalendarDate } from 'react-icons/bs'
 import { FaStar, FaUser } from 'react-icons/fa'
+import { FiSearch } from 'react-icons/fi'
 import { MdOutlineRateReview } from 'react-icons/md'
 import { useHeaderScroll } from '~/hooks/useHeaderScroll'
 import { cn } from '~/utils/cn'
@@ -67,7 +68,7 @@ export const Header = () => {
     resizeObserver.observe(navRef.current)
     return () => resizeObserver.disconnect()
   }, [])
-  console.log(pathname, 'pathname')
+
   return (
     <header
       ref={headerRef}
@@ -93,6 +94,9 @@ export const Header = () => {
           ))}
         </ul>
       </nav>
+      <Link href={ROUTES.SEARCH} className={styles.search}>
+        <FiSearch size='35px' />
+      </Link>
     </header>
   )
 }

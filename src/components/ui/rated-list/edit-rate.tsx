@@ -56,6 +56,14 @@ export const EditRate = ({ id, title, comment, isBest, rated }: Props) => {
 
   const onSubmit = async (formData: RateForm) => {
     console.log(formData, 'formData')
+    if (
+      comment === formData.comment &&
+      isBest === formData.isBest &&
+      rated === formData.rated
+    ) {
+      onClose()
+      return
+    }
     const data = {
       id,
       comment: formData.comment,

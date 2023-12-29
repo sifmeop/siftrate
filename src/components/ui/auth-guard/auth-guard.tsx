@@ -1,5 +1,5 @@
 import { signIn, useSession } from 'next-auth/react'
-import { FaGithub, FaGoogle, FaTwitch } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
 import { FullScreenLoader } from '../full-screen-loader'
 import { UiButton } from '../ui-button'
 
@@ -21,15 +21,18 @@ export const AuthGuard = ({ children }: Props) => {
     return (
       <div className='mx-auto flex h-screen w-full max-w-80 flex-col items-center justify-center gap-2'>
         <p>ВОЙТИ</p>
-        <UiButton className='w-full' onClick={() => signIn('google')}>
-          <FaGoogle />
+        <UiButton
+          className='w-full'
+          onClick={() => signIn('google')}
+          startContent={<FaGoogle />}>
+          Google
         </UiButton>
-        <UiButton className='w-full' onClick={() => signIn('twitch')} disabled>
+        {/* <UiButton className='w-full' onClick={() => signIn('twitch')} disabled>
           <FaTwitch />
         </UiButton>
         <UiButton className='w-full' onClick={() => signIn('github')} disabled>
           <FaGithub />
-        </UiButton>
+        </UiButton> */}
       </div>
     )
   }

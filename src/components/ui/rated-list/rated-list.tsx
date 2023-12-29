@@ -1,11 +1,21 @@
-import { Tab, Tabs } from '@nextui-org/react'
+import { Input, Tab, Tabs } from '@nextui-org/react'
 import { type RatedMovie } from '@prisma/client'
 import { type TRPCClientErrorLike } from '@trpc/client'
 import { type UseTRPCQueryResult } from '@trpc/react-query/shared'
 import { type BuildProcedure } from '@trpc/server'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { FaSearch } from 'react-icons/fa'
 import { Loader } from '../loader'
 import { PageSubTitle } from '../page-sub-title'
 import { RatedRow } from './rated-row'
+
+interface Item {
+  props: {
+    movie: {
+      title: string
+    }
+  }
+}
 
 type Props = UseTRPCQueryResult<
   RatedMovie[],
@@ -24,6 +34,10 @@ export const RatedList = ({
   isError,
   isUserProfile = false
 }: Props) => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
   if (isError) {
     return <div>{error.message}</div>
   }
@@ -69,16 +83,34 @@ export const RatedList = ({
   ]
 
   return (
-    <div className='mx-auto grid max-w-3xl gap-6'>
+    <div className='mx-auto flex max-w-3xl flex-col gap-6'>
       <Tabs
         fullWidth
         variant='bordered'
         size='lg'
         aria-label='Dynamic tabs'
-        items={tabs}>
+        items={tabs}
+        onSelectionChange={() => router.push(pathname)}>
         {(item) => (
           <Tab className='p-0' key={item.id} title={item.label}>
-            {item.content}
+            <Input
+              startContent={<FaSearch />}
+              className='mb-6'
+              onValueChange={(value) => {
+                if (value === '') {
+                  router.push(pathname)
+                } else {
+                  const params = new URLSearchParams(searchParams)
+                  params.set('search', value)
+                  router.push(pathname + '?' + params.toString())
+                }
+              }}
+            />
+            {item.content.filter((item: Item) =>
+              item.props.movie.title
+                .toLowerCase()
+                .includes((searchParams.get('search') ?? '').toLowerCase())
+            )}
           </Tab>
         )}
       </Tabs>
