@@ -8,7 +8,7 @@ export const ByDateMovieList = () => {
 
   const { selectedMonth, selectedYear } = useByDateStore()
 
-  const response = api.movie.getByDateMovies.useQuery({
+  const response = api.rate.getByDateMovies.useQuery({
     userId: id,
     selectedMonth,
     selectedYear

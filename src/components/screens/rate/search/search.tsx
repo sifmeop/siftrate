@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import { IoClose } from 'react-icons/io5'
-import { useOnClickOutside } from '~/hooks/useOnClickOutside'
+import { useOnClickOutside } from 'usehooks-ts'
 import { ErrorMessage } from '~/ui/error-message'
 import { RateLabel } from '~/ui/rate-label'
 import { UiInput } from '~/ui/ui-input'
@@ -14,10 +14,16 @@ import { useSearchList } from './use-search-list'
 interface Props {
   setMovieData: (data: RateFormMovie) => void
   errorMessage?: string
-  poster: React.MutableRefObject<string | null>
+  poster: string | undefined
+  setPoster: (value: string | undefined) => void
 }
 
-export const Search = ({ setMovieData, errorMessage, poster }: Props) => {
+export const Search = ({
+  setMovieData,
+  errorMessage,
+  poster,
+  setPoster
+}: Props) => {
   const [value, setValue] = useState('')
 
   const { data } = useSearchList(value)
@@ -29,14 +35,14 @@ export const Search = ({ setMovieData, errorMessage, poster }: Props) => {
   useOnClickOutside(searchRef, handleClear)
 
   const handleSrc = (): string => {
-    if (poster.current) return poster.current
+    if (poster) return poster
 
     return '/default-cover-rate.svg'
   }
 
   const handleClick = (item: RateFormMovie) => {
     setMovieData(item)
-    poster.current = item.poster ? item.poster : null
+    setPoster(item.poster)
     handleClear()
   }
 

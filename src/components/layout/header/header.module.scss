@@ -1,5 +1,5 @@
 .header {
-  @apply fixed left-0 right-0 top-0 z-10 mx-auto flex w-fit justify-center gap-3 bg-black/50 p-3 transition-all duration-300;
+  @apply fixed left-0 right-0 top-0 z-10 mx-auto flex w-fit justify-center gap-3 bg-[#0f0f0f] p-3 transition-all duration-300;
 }
 
 .logo {
@@ -19,7 +19,7 @@
 }
 
 .active_scroll {
-  @apply w-full bg-black;
+  @apply w-full;
 }
 
 .icon {

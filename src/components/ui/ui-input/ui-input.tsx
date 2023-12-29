@@ -6,6 +6,8 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   register?: UseFormRegisterReturn
 }
 
-export const UiInput = ({ className, ...props }: Props) => {
-  return <input className={cn(styles.input, className)} {...props} />
+export const UiInput = ({ className, register, ...props }: Props) => {
+  return (
+    <input {...register} className={cn(styles.input, className)} {...props} />
+  )
 }

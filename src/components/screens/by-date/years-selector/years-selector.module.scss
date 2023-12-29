@@ -3,25 +3,33 @@
 }
 
 .button {
-  @apply text-3xl font-bold text-white/40;
+  @apply flex items-end text-3xl font-bold text-white/40 disabled:cursor-not-allowed;
+}
 
-  @media (max-width: 768px) {
-    @apply text-2xl;
-  }
-
-  @media (max-width: 425px) {
-    @apply text-xl;
-  }
+.count {
+  @apply flex h-8 items-center gap-1 text-3xl text-white/30;
 }
 
 .active {
   @apply text-5xl text-white;
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
+  .button,
+  .count {
+    @apply text-2xl;
+  }
+  .active {
     @apply text-4xl;
   }
+}
 
-  @media (max-width: 425px) {
+@media (max-width: 425px) {
+  .button,
+  .count {
+    @apply text-xl;
+  }
+  .active {
     @apply text-3xl;
   }
 }

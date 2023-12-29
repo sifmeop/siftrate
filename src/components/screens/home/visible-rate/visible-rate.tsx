@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useUser } from '~/hooks/useUser'
+import { useQueryLoadingStore } from '~/store/query-loading'
 import { UiCheckbox } from '~/ui/ui-checkbox'
 import { api } from '~/utils/api'
 import { LinkRating } from '../link-rating/link-rating'
@@ -24,10 +25,12 @@ interface VisibleRateProps {
 
 const VisibleRate = ({ isVisible, setIsVisible }: VisibleRateProps) => {
   const { id } = useUser()
-  const { mutateAsync, isLoading } = api.user.toggleVisible.useMutation()
+  const setIsLoading = useQueryLoadingStore((state) => state.setIsLoading)
+  const { mutateAsync } = api.user.toggleVisible.useMutation()
 
   const handleClick = async () => {
     try {
+      setIsLoading(true)
       await toast.promise(mutateAsync({ id, isVisibleRate: !isVisible }), {
         loading: 'Изменение...',
         success: () => {
@@ -38,6 +41,8 @@ const VisibleRate = ({ isVisible, setIsVisible }: VisibleRateProps) => {
       })
     } catch (error) {
       console.log('ОШИБКА ИЗМЕНЕНИЯ ВИДИМОСТИ', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 

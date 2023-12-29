@@ -2,25 +2,17 @@ import { z } from 'zod'
 import { createTRPCRouter, publicProcedure } from '../trpc'
 
 export const userRouter = createTRPCRouter({
-  getUser: publicProcedure
+  checkVisibleUser: publicProcedure
     .input(
       z.object({
-        id: z.string(),
-        isBest: z.boolean().optional()
+        id: z.string().optional()
       })
     )
     .query(({ ctx, input }) => {
-      return ctx.db.user.findFirst({
+      return ctx.db.user.findUnique({
         where: {
           id: input.id,
           isVisibleRate: true
-        },
-        include: {
-          RatedMovie: {
-            where: {
-              isBest: input.isBest
-            }
-          }
         }
       })
     }),

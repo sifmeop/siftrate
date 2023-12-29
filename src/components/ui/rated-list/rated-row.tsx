@@ -1,19 +1,20 @@
 import { type RatedMovie } from '@prisma/client'
-import clsx from 'clsx'
 import Image from 'next/image'
 import { BiCameraMovie, BiMovie } from 'react-icons/bi'
 import { FaStar } from 'react-icons/fa'
 import { MdFavorite } from 'react-icons/md'
 import { cn } from '~/utils/cn'
+import { DeleteRate } from './delete-rate'
+import { EditRate } from './edit-rate'
 import styles from './rated-row.module.scss'
 
 interface Props {
   movie: RatedMovie
   index: number
-  isProfile?: boolean
+  isUserProfile?: boolean
 }
 
-export const RatedRow = ({ movie, index, isProfile = false }: Props) => {
+export const RatedRow = ({ movie, index, isUserProfile = false }: Props) => {
   const isCurrentDay =
     new Date(movie.createdAt).toLocaleDateString() ===
     new Date().toLocaleDateString()
@@ -21,30 +22,30 @@ export const RatedRow = ({ movie, index, isProfile = false }: Props) => {
   return (
     <div
       key={movie.id}
-      className={clsx(styles.wrapper, {
-        ['bg-white/20']: movie.isBest
+      className={cn(styles.wrapper, {
+        [styles.isBest!]: movie.isBest
       })}>
       <div className={styles.movieTop}>
         <time
-          className={clsx('text-lg text-white/50', {
+          className={cn('text-lg text-white/50', {
             'text-white underline': isCurrentDay
           })}>
           {new Date(movie.createdAt).toLocaleDateString()}
         </time>
-        {/* {!isProfile && (
+        {!isUserProfile && (
           <>
-            <EditReview review={movie} />
-            <DeleteReview id={movie.id} title={movie.title} />
+            <EditRate {...movie} />
+            <DeleteRate id={movie.id} title={movie.title} />
           </>
-        )} */}
+        )}
       </div>
       <div className={styles.info}>
         <span className={styles.index}>{index}.</span>
         <div className='relative'>
           <div
             className={cn(styles.mediaType, {
-              [styles.isMovie]: movie.type === 'MOVIE',
-              [styles.isSeries]: movie.type === 'TV'
+              [styles.isMovie!]: movie.type === 'MOVIE',
+              [styles.isSeries!]: movie.type === 'TV'
             })}>
             {movie.type === 'MOVIE' ? (
               <BiCameraMovie size='16px' />

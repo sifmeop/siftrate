@@ -15,6 +15,11 @@ export const startYear = 2023
 export const currentYear = new Date().getFullYear()
 export const currentMonth = new Date().getMonth() + 1
 
+export const years = Array.from(
+  { length: currentYear - startYear + 1 },
+  (_, i) => startYear + i
+)
+
 export const months = [
   { id: 1, title: 'Январь' },
   { id: 2, title: 'Февраль' },

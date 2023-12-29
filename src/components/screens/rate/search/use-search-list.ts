@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useDebounce } from '~/hooks/useDebounce'
+import { useDebounce } from 'usehooks-ts'
 import { type MovieDBSearch } from '~/types/movie-db-search.interface'
 import { MOVIE_DB_API_KEY, MOVIE_DB_API_URL } from '~/utils/constants'
 

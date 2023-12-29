@@ -18,12 +18,7 @@ const config = {
     defaultLocale: 'ru'
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**'
-      }
-    ]
+    domains: ['*', 'localhost', 'image.tmdb.org', 'lh3.googleusercontent.com']
   }
 }
 

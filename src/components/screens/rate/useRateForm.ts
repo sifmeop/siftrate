@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TypeEnum } from '@prisma/client'
-import { useRef } from 'react'
 import {
   useForm,
   type SubmitHandler,
@@ -9,6 +8,7 @@ import {
 import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { useUser } from '~/hooks/useUser'
+import { useQueryLoadingStore } from '~/store/query-loading'
 import { api } from '~/utils/api'
 
 const schema = z.object({
@@ -22,9 +22,13 @@ const schema = z.object({
       required_error: 'Вы не выбрали фильм'
     }
   ),
-  rate: z.number({
-    required_error: 'Укажите рейтинг'
-  }),
+  rated: z
+    .number({
+      required_error: 'Укажите рейтинг'
+    })
+    .min(0, 'Минимальный рейтинг 0')
+    .max(10, 'Максимальный рейтинг 10')
+    .step(0.1, 'Допустимо 1 знак после точки'),
   comment: z.string(),
   isBest: z.boolean()
 })
@@ -36,18 +40,18 @@ export type RegisterRateForm = UseFormRegister<RateForm>
 
 export const useRateForm = () => {
   const { id } = useUser()
-
-  const posterRef = useRef<string | null>(null)
+  const setIsLoading = useQueryLoadingStore((state) => state.setIsLoading)
 
   const form = useForm<RateForm>({
     defaultValues: {
-      isBest: false,
-      comment: ''
+      isBest: false
     },
     resolver: zodResolver(schema)
   })
 
-  const { mutateAsync, isLoading } = api.rate.createRate.useMutation()
+  const poster = form.watch('movie.poster')
+
+  const { mutateAsync } = api.rate.createRate.useMutation()
 
   const onSubmit: SubmitHandler<RateForm> = async (formData) => {
     console.log(formData)
@@ -56,17 +60,17 @@ export const useRateForm = () => {
       userId: id,
       title: formData.movie.title,
       poster: formData.movie.poster,
-      rated: formData.rate,
+      rated: +formData.rated,
       comment: formData.comment,
       type: formData.movie.type,
       isBest: formData.isBest
     }
 
     try {
+      setIsLoading(true)
       await toast.promise(mutateAsync(data), {
         loading: 'Оценивание...',
         success: () => {
-          posterRef.current = null
           form.reset()
           return 'Успешно оценено'
         },
@@ -83,8 +87,10 @@ export const useRateForm = () => {
       })
     } catch (error) {
       console.log('ОШИБКА СОЗДАНИЯ ОЦЕНКИ', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  return { ...form, poster: posterRef, onSubmit }
+  return { ...form, poster, onSubmit }
 }

@@ -1,23 +1,14 @@
 .wrapper {
-  @apply mb-5 grid grid-cols-6 gap-3;
-
-  @media (max-width: 768px) {
-    @apply grid-cols-4;
-  }
-
-  @media (max-width: 425px) {
-    @apply grid-cols-3;
+  @apply mb-5 grid gap-3;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  @media (width <= 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 
 .button {
-  @apply flex w-full max-w-[17.5rem] flex-wrap items-center justify-between gap-2 rounded-[0.625rem] px-5 py-4 text-2xl font-bold;
+  @apply flex w-full items-center justify-between gap-2 rounded-[0.625rem] border border-white/30 px-5 py-4 text-2xl font-bold disabled:cursor-not-allowed;
   background-color: rgba(25, 25, 25, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-
-  @media (max-width: 1024px) {
-    @apply flex-col items-start;
-  }
 
   @media (max-width: 768px) {
     @apply p-3 text-lg font-medium;

@@ -1,3 +1,11 @@
+import { useUser } from '~/hooks/useUser'
+import { RatedList } from '~/ui/rated-list'
+import { api } from '~/utils/api'
+
 export const Rating = () => {
-  return <div>Rating</div>
+  const { id: userId } = useUser()
+
+  const response = api.rate.getAllRatedMovies.useQuery({ userId })
+
+  return <RatedList {...response} />
 }

@@ -10,11 +10,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: '#b93753',
+        secondary: '#717794',
+        gray: '#393b4a',
         red: '#FF4545',
-        black: '#1e1e1e'
+        black: '#1e1e1e',
+        box: '#111217',
+        bgcolor: 'var(--bgcolor)'
       },
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans]
+        montserrat: ['Montserrat', ...fontFamily.sans]
       }
     },
     screens: {

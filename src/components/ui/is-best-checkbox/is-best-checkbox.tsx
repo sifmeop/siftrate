@@ -1,12 +1,11 @@
-import { Controller, type Control } from 'react-hook-form'
-import { UiCheckbox } from '~/ui/ui-checkbox'
-import { type RateForm } from '../useRateForm'
+import { Controller, type Control, type FieldValues } from 'react-hook-form'
+import { UiCheckbox } from '../ui-checkbox'
 
 interface Props {
-  control: Control<RateForm>
+  control: Control<FieldValues>
 }
 
-export const IsBest = ({ control }: Props) => {
+export const IsBestCheckbox = ({ control }: Props) => {
   return (
     <Controller
       control={control}
@@ -14,7 +13,7 @@ export const IsBest = ({ control }: Props) => {
       render={({ field: { value, onChange } }) => (
         <UiCheckbox
           className='mx-auto gap-2'
-          isSelected={value}
+          isSelected={value as boolean}
           onValueChange={onChange}>
           Лучший?
         </UiCheckbox>

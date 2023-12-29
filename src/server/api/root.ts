@@ -1,5 +1,4 @@
 import { createTRPCRouter } from '~/server/api/trpc'
-import { movieRouter } from './routers/movie'
 import { rateRouter } from './routers/rate'
 import { userRouter } from './routers/user'
 
@@ -10,8 +9,7 @@ import { userRouter } from './routers/user'
  */
 export const appRouter = createTRPCRouter({
   user: userRouter,
-  rate: rateRouter,
-  movie: movieRouter
+  rate: rateRouter
 })
 
 // export type definition of API

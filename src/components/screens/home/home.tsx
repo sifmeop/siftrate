@@ -22,7 +22,9 @@ export const Home = () => {
             alt={`Photo ${name ?? 'user'}`}
           />
           <p className='text-lg font-medium'>{email ?? '-'}</p>
-          <UiButton onClick={() => void signOut()}>Выйти</UiButton>
+          <UiButton className='w-full' onClick={() => void signOut()}>
+            Выйти
+          </UiButton>
         </div>
       </div>
       <VisibleRateWrapper />

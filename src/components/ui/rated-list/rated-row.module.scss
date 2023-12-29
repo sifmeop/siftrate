@@ -1,9 +1,16 @@
 .wrapper {
   @apply rounded-[10px] bg-white/5 px-10 py-5;
+  &:not(:last-child) {
+    @apply mb-4;
+  }
+}
+
+.isBest {
+  @apply border-4 border-primary/50 bg-white/15;
 }
 
 .movieTop {
-  @apply mb-2 flex justify-end gap-4;
+  @apply mb-2 flex items-center justify-end gap-2;
 }
 
 .mediaType {

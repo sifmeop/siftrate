@@ -2,24 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* html,
-body,
-#__next {
-  height: 100%;
-} */
+:root {
+  --bgcolor: '#0c0d11';
+}
 
 html {
-  @apply min-h-full bg-[#0e0e0e];
+  background-color: var(--bgcolor) !important;
+}
+
+html:has(#__next[aria-hidden='true']) {
+  overflow-y: hidden !important;
 }
 
 body {
-  @apply text-base text-white;
-  font-family: 'Montserrat', sans-serif;
+  @apply overflow-x-hidden font-montserrat text-base text-white;
 }
 
 ::-webkit-scrollbar {
-  width: 15px;
-  background-color: #1e1e1e;
+  @apply w-4 bg-black;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,5 +27,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(255 255 255 / 0.8);
+  @apply bg-white/80;
 }
