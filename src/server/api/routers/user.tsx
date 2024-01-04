@@ -42,6 +42,7 @@ export const userRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const search = await ctx.db.user.findMany({
         where: {
+          isVisibleRate: true,
           name: {
             contains: input.name,
             mode: 'insensitive'
@@ -54,7 +55,7 @@ export const userRouter = createTRPCRouter({
           async ({ id }) =>
             await ctx.db.ratedMovie.count({
               where: {
-                userId: id,
+                userId: id
               },
               select: {
                 _all: true,
