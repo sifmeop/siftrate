@@ -9,12 +9,14 @@ import { api } from '~/utils/api'
 export const GradeSelect = () => {
   const { id } = useUser()
   const { selectedYear } = useByDateStore()
-  const { data } = api.user.getAllUserGrade.useQuery({ id, year: selectedYear })
-  const [selectedItem, setSelectedItem] = useState<Set<string>>(new Set([]))
-
-  const router = useRouter()
   const pathname = usePathname()
+  const router = useRouter()
   const params = useSearchParams()
+  const { data } = api.user.getAllUserGrade.useQuery({
+    id,
+    year: pathname === '/rating' ? undefined : selectedYear
+  })
+  const [selectedItem, setSelectedItem] = useState<Set<string>>(new Set([]))
 
   useEffect(() => {
     if (data?.length) {

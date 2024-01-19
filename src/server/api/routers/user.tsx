@@ -85,7 +85,7 @@ export const userRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-        year: z.number()
+        year: z.number().optional()
       })
     )
     .query(async ({ ctx, input }) => {
@@ -93,8 +93,8 @@ export const userRouter = createTRPCRouter({
         where: {
           userId: input.id,
           createdAt: {
-            gte: getGte(input.year),
-            lte: getLte(input.year)
+            gte: input.year ? getGte(input.year) : undefined,
+            lte: input.year ? getLte(input.year) : undefined
           }
         },
         select: {
