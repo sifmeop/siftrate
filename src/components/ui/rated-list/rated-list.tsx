@@ -1,18 +1,22 @@
-import { Input, Tab, Tabs } from '@nextui-org/react'
+import { Tab, Tabs } from '@nextui-org/react'
 import { type RatedMovie } from '@prisma/client'
 import { type TRPCClientErrorLike } from '@trpc/client'
 import { type UseTRPCQueryResult } from '@trpc/react-query/shared'
 import { type BuildProcedure } from '@trpc/server'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { FaSearch } from 'react-icons/fa'
+import { useSearchParams } from 'next/navigation'
 import { Loader } from '../loader'
 import { PageSubTitle } from '../page-sub-title'
+import { GradeSelect } from './grade-select'
 import { RatedRow } from './rated-row'
+import { SearchMovies } from './search-movies'
+import { SortMovies } from './sort-movies'
 
 interface Item {
   props: {
     movie: {
       title: string
+      rated: number
+      createdAt: Date
     }
   }
 }
@@ -34,8 +38,6 @@ export const RatedList = ({
   isError,
   isUserProfile = false
 }: Props) => {
-  const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
 
   if (isError) {
@@ -82,35 +84,64 @@ export const RatedList = ({
     }
   ]
 
+  const filterMovies = (item: JSX.Element[]) => {
+    let filterSearchMovies = item.filter(
+      (item: Item) =>
+        item.props.movie.title
+          .toLowerCase()
+          .includes((searchParams.get('search') ?? '').toLowerCase()) &&
+        (Number(
+          searchParams.get('grade') && searchParams.get('grade') !== 'Все'
+        )
+          ? item.props.movie.rated === Number(searchParams.get('grade') ?? '')
+          : true)
+    )
+
+    const sort = searchParams.get('sort')
+
+    if (sort === 'new') {
+      filterSearchMovies = [...filterSearchMovies].sort(
+        (a: Item, b: Item) =>
+          new Date(b.props.movie.createdAt).getTime() -
+          new Date(a.props.movie.createdAt).getTime()
+      )
+    } else if (sort === 'old') {
+      filterSearchMovies = [...filterSearchMovies].sort(
+        (a: Item, b: Item) =>
+          new Date(a.props.movie.createdAt).getTime() -
+          new Date(b.props.movie.createdAt).getTime()
+      )
+    } else if (sort === 'desc') {
+      filterSearchMovies = [...filterSearchMovies].sort(
+        (a: Item, b: Item) => b.props.movie.rated - a.props.movie.rated
+      )
+    } else if (sort === 'asc') {
+      filterSearchMovies = [...filterSearchMovies].sort(
+        (a: Item, b: Item) => a.props.movie.rated - b.props.movie.rated
+      )
+    }
+
+    return filterSearchMovies
+  }
+
   return (
-    <div className='mx-auto flex max-w-3xl flex-col gap-6'>
+    <div className='mx-auto flex max-w-3xl flex-col gap-4'>
+      <SearchMovies />
+      <div className='grid grid-cols-2 gap-4 mobile:grid-cols-1 mobile:grid-rows-2'>
+        <SortMovies />
+        <GradeSelect />
+      </div>
       <Tabs
+        radius='sm'
+        className='-order-1'
         fullWidth
         variant='bordered'
         size='lg'
-        aria-label='Dynamic tabs'
-        items={tabs}
-        onSelectionChange={() => router.push(pathname)}>
+        aria-label='Tabs'
+        items={tabs}>
         {(item) => (
           <Tab className='p-0' key={item.id} title={item.label}>
-            <Input
-              startContent={<FaSearch />}
-              className='mb-6'
-              onValueChange={(value) => {
-                if (value === '') {
-                  router.push(pathname)
-                } else {
-                  const params = new URLSearchParams(searchParams)
-                  params.set('search', value)
-                  router.push(pathname + '?' + params.toString())
-                }
-              }}
-            />
-            {item.content.filter((item: Item) =>
-              item.props.movie.title
-                .toLowerCase()
-                .includes((searchParams.get('search') ?? '').toLowerCase())
-            )}
+            {filterMovies(item.content)}
           </Tab>
         )}
       </Tabs>

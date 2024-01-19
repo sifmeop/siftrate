@@ -1,5 +1,6 @@
 import { Divider, Select, SelectItem } from '@nextui-org/react'
 import clsx from 'clsx'
+import { useEffect } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { useUser } from '~/hooks/useUser'
 import { useByDateStore } from '~/store/by-date'
@@ -30,6 +31,19 @@ export const MonthsSelector = () => {
 
   const zeroOptions = options?.filter(({ count }) => count === 0)
   const disabledKeys = zeroOptions?.map(({ label }) => label)
+
+  useEffect(() => {
+    if (data?.length) {
+      const firstDataIndex = data.findIndex((item) => item.count > 0)
+      console.log(firstDataIndex, 'firstDataIndex')
+      console.log(selectedMonth, 'selectedMonth')
+      console.log(data[selectedMonth], 'data[selectedMonth]')
+
+      if (data[selectedMonth]?.count === 0) {
+        setSelectedMonth(firstDataIndex + 1)
+      }
+    }
+  }, [data])
 
   return (
     <div className={styles.wrapper}>

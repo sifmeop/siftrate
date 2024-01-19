@@ -1,6 +1,15 @@
 import { z } from 'zod'
 import { createTRPCRouter, publicProcedure } from '../trpc'
 
+const getGte = (year: number) => {
+  return new Date(year, 0, 1)
+}
+
+const getLte = (year: number) => {
+  const lastDay = new Date(year, 11, 0).getDate()
+  return new Date(year, 11, lastDay)
+}
+
 export const userRouter = createTRPCRouter({
   checkVisibleUser: publicProcedure
     .input(
@@ -71,5 +80,50 @@ export const userRouter = createTRPCRouter({
         countBest: counts?.[index]?.isBest ?? 0
       }))
       return result
+    }),
+  getAllUserGrade: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        year: z.number()
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const response = await ctx.db.ratedMovie.findMany({
+        where: {
+          userId: input.id,
+          createdAt: {
+            gte: getGte(input.year),
+            lte: getLte(input.year)
+          }
+        },
+        select: {
+          rated: true
+        }
+      })
+      let grades: {
+        label: number | string
+        value: number | string
+      }[] = []
+      response.forEach(({ rated }) => {
+        const findGrade = grades.findIndex(({ label }) => label === rated)
+
+        if (findGrade !== -1) {
+          const { value } = grades[findGrade]!
+
+          grades[findGrade] = {
+            label: rated,
+            value: +value + 1
+          }
+        } else {
+          grades.push({
+            label: rated,
+            value: 1
+          })
+        }
+      })
+      grades = [...grades].sort((a, b) => +b.label - +a.label)
+      const count = response.length
+      return [{ label: 'Все', value: count }, ...grades]
     })
 })
