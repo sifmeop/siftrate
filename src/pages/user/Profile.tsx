@@ -2,6 +2,7 @@ import { type User } from '@prisma/client'
 import Image from 'next/image'
 import { PageTitle } from '~/ui/page-title'
 import { RatedList } from '~/ui/rated-list'
+import { Meta } from '~/utils/Meta'
 import { api } from '~/utils/api'
 
 interface Props {
@@ -13,6 +14,7 @@ const Profile = ({ user }: Props) => {
 
   return (
     <>
+      <Meta title='ПРОФИЛЬ' description='Профиль пользователя' />
       <div className='mx-auto mb-[1.5625rem] flex w-fit items-center gap-4 rounded-lg bg-white/50 p-4'>
         <Image
           className='rounded-full'
