@@ -33,14 +33,14 @@ export const MonthsSelector = () => {
   const disabledKeys = zeroOptions?.map(({ label }) => label)
 
   useEffect(() => {
-    if (data?.length) {
-      const firstDataIndex = data.findIndex((item) => item.count > 0)
-      console.log(firstDataIndex, 'firstDataIndex')
-      console.log(selectedMonth, 'selectedMonth')
-      console.log(data[selectedMonth], 'data[selectedMonth]')
-
-      if (data[selectedMonth]?.count === 0) {
-        setSelectedMonth(firstDataIndex + 1)
+    if (data && data?.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      const lastDataIndex = data.findLastIndex(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        (item) => item.count > 0
+      ) as number
+      if (lastDataIndex !== -1) {
+        setSelectedMonth(lastDataIndex + 1)
       }
     }
   }, [data])
