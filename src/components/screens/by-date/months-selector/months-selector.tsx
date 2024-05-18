@@ -34,11 +34,10 @@ export const MonthsSelector = () => {
 
   useEffect(() => {
     if (data && data?.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      const lastDataIndex = data.findLastIndex(
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        (item) => item.count > 0
-      ) as number
+      const lastDataIndex = [...data]
+        .reverse()
+        .findIndex((item) => item.count > 0)
+
       if (lastDataIndex !== -1) {
         setSelectedMonth(lastDataIndex + 1)
       }
