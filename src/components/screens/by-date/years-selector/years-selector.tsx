@@ -8,7 +8,7 @@ import { api } from '~/utils/api'
 import styles from './years-selector.module.scss'
 
 export const YearsSelector = () => {
-  const { selectedYear, setSelectedYear } = useByDateStore()
+  const { selectedYear, setSelectedYear, setSelectedMonth } = useByDateStore()
   const { id: userId } = useUser()
   const { data } = api.rate.getYearRecords.useQuery({ userId })
   const searchParams = useSearchParams()
@@ -36,7 +36,14 @@ export const YearsSelector = () => {
                 return
               }
               if (year !== selectedYear) {
-                setSelectedYear(year ?? selectedYear)
+                setSelectedYear(year)
+
+                if (year === new Date().getFullYear()) {
+                  setSelectedMonth(new Date().getMonth() + 1)
+                  return
+                }
+
+                setSelectedMonth(12)
               }
             }}
             disabled={isDisabled}>

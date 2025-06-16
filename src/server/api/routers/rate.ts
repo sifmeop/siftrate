@@ -23,11 +23,12 @@ export const rateRouter = createTRPCRouter({
       const result = await ctx.db.ratedMovie.findMany({
         where: {
           userId: input.userId
+        },
+        orderBy: {
+          createdAt: 'desc'
         }
       })
-      return [...result]?.sort(
-        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-      )
+      return result
     }),
   getYearRecords: publicProcedure
     .input(
@@ -55,7 +56,7 @@ export const rateRouter = createTRPCRouter({
         )
       )
       const result = counts.map(({ _all, isBest }, index) => ({
-        year: years[index],
+        year: years[index]!,
         count: _all ?? 0,
         countBest: isBest ?? 0
       }))
@@ -112,11 +113,12 @@ export const rateRouter = createTRPCRouter({
             gte: getGte(input.selectedYear, input.selectedMonth - 1),
             lte: getLte(input.selectedYear, input.selectedMonth - 1)
           }
+        },
+        orderBy: {
+          createdAt: 'desc'
         }
       })
-      return [...result]?.sort(
-        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-      )
+      return result
     }),
   createRate: publicProcedure
     .input(
